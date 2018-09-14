@@ -1,6 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorPrimary">#ff4081</color>
+    <color name="colorPrimaryDark">#C51162</color>
+    <color name="colorAccent">#6b28c2</color>
+
+    <color name="colorBackground">#FFFFFF</color>
+    <color name="colorSecondaryBackground">#d2d2d2</color>
+
+    <color name="colorText">#626262</color>
+    <color name="colorTextMediumDark">#737373</color>
+    <color name="colorTextMedium">#949494</color>
+    <color name="colorTextLight">#FFFFFF</color>
+
+    <color name="itemUnknown">#b7b7b7</color>
+    <color name="itemApprentice">#C51162</color>
+    <color name="itemGuru">#AA00FF</color>
+    <color name="itemMaster">#5C6BC0</color>
+    <color name="itemEnlightened">#42A5F5</color>
+    <color name="itemBurned">#444444</color>
 </resources>
