@@ -7,39 +7,39 @@ import android.net.Uri
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
-import android.support.v7.widget.Toolbar
+import android.support.v4.app.Fragment
+//import android.support.v7.widget.Toolbar
 import android.util.Log
-import android.widget.FrameLayout
 
-class MainAct : AppCompatActivity(), KanjiFrag.OnFragmentInteractionListener {
-    private val toolbar by lazy { findViewById<Toolbar>(R.id.toolbar) }
-    private val contentFrame by lazy { findViewById<FrameLayout>(R.id.contentFrame)}
+class MainAct : AppCompatActivity(),
+        KanjiFrag.OnFragmentInteractionListener,
+        VocabularyFrag.OnFragmentInteractionListener {
+
+    //private val toolbar by lazy { findViewById<Toolbar>(R.id.toolbar) }
     private val navigationBar by lazy { findViewById<BottomNavigationView>(R.id.navigationBar) }
     private val mItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
+        var fragment : Fragment = VocabularyFrag.newInstance()
         when (item.itemId) {
             R.id.navigation_item_home -> {
                 //TODO: Add Functionality
-                return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_item_kanji -> {
-                val fragment = KanjiFrag.newInstance(prefsOnyomiScript, prefsKanjiColumns)
-                supportFragmentManager
-                        .beginTransaction()
-                        .replace(R.id.contentFrame, fragment)
-                        .commit()
-                return@OnNavigationItemSelectedListener true
+                fragment = KanjiFrag.newInstance(prefsOnyomiScript, prefsKanjiColumns)
             }
             R.id.navigation_item_vocabulary -> {
-                //TODO: Add Functionality
-                return@OnNavigationItemSelectedListener true
+                fragment = VocabularyFrag.newInstance()
             }
             R.id.navigation_item_settings -> {
                 //TODO: Add Functionality
-                return@OnNavigationItemSelectedListener true
             }
             else ->
                 return@OnNavigationItemSelectedListener false
         }
+        supportFragmentManager
+                .beginTransaction()
+                .replace(R.id.contentFrame, fragment)
+                .commit()
+        return@OnNavigationItemSelectedListener true
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -76,7 +76,7 @@ class MainAct : AppCompatActivity(), KanjiFrag.OnFragmentInteractionListener {
     }
     companion object {
         var prefsOnyomiScript = ""
-        var prefsKanjiColumns = 0
+        var prefsKanjiColumns = 3
         var prefsSeeAllLevels = false
     }
 }
