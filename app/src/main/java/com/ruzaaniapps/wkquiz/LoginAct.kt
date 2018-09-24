@@ -17,6 +17,12 @@ import kotlinx.android.synthetic.main.act_login.*
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.toast
 import org.jetbrains.anko.uiThread
+import android.content.pm.PackageManager
+import android.support.v4.app.ActivityCompat
+import android.os.Build
+
+
+
 
 class LoginAct : AppCompatActivity() {
     private val mToolbar by lazy { findViewById<Toolbar>(R.id.toolbar) }
@@ -29,16 +35,20 @@ class LoginAct : AppCompatActivity() {
         addListenerOnClickEditText()
         addListenerOnClickButton()
         mToolbar.title = R.string.app_name.toString()
-        if(savedInstanceState != null)
+        Log.wtf("LoginAct", "check for saved instance")
+        if (savedInstanceState != null)
             loginApiKey.text.append(savedInstanceState.getString("apitext") ?: "")
     }
 
-    override fun onBackPressed() {}
+    override fun onBackPressed() {
+        Log.wtf("LoginAct", "Back button pressed")
+    }
 
-    private fun addListenerOnClickEditText(){
+    private fun addListenerOnClickEditText() {
         loginApiKey.setOnClickListener { _ ->
             val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             imm.showSoftInput(loginApiKey, InputMethodManager.SHOW_IMPLICIT)
+            Log.wtf("LoginAct", "opening IME")
         }
     }
 

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/navigation_item_home"
+        android:icon="@drawable/ic_home"
+        android:title="@string/navigation_bar_home"
+        app:showAsAction="ifRoom"/>
+
+    <item
+        android:id="@+id/navigation_item_kanji"
+        android:icon="@drawable/ic_kanji"
+        android:title="@string/navigation_bar_kanji"
+        app:showAsAction="ifRoom"/>
+
+    <item
+        android:id="@+id/navigation_item_vocabulary"
+        android:icon="@drawable/ic_kotoba"
+        android:title="@string/navigation_bar_vocabulary"
+        app:showAsAction="ifRoom"/>
+
+    <item
+        android:id="@+id/navigation_item_settings"
+        android:icon="@drawable/ic_settings"
+        android:title="@string/navigation_bar_settings"
+        app:showAsAction="ifRoom"/>
+
+</menu>

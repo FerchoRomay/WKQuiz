@@ -11,4 +11,8 @@
     <string name="login_text">Enter your API key:</string>
     <string name="login_hint">API Key</string>
     <string name="login_button">Sing In</string>
+    <string name="navigation_bar_home">Home</string>
+    <string name="navigation_bar_kanji">Kanji</string>
+    <string name="navigation_bar_vocabulary">Vocabulary</string>
+    <string name="navigation_bar_settings">Settings</string>
 </resources>
