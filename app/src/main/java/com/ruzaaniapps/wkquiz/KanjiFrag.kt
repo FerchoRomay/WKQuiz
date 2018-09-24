@@ -32,7 +32,7 @@ class KanjiFrag : Fragment() {
         recyclerView.layoutManager = GridLayoutManager(this.context, numberOfColumns)
         doAsync {
             val userLevel = listOf(App.datasource!!.wkDao().getUserInfo().level)
-            val kanjiArray = ArrayList(App.datasource!!.wkDao().getAllKanji())
+            val kanjiArray = ArrayList(App.datasource!!.wkDao().getKanjiByLevel(userLevel))
             uiThread { recyclerView.adapter = KanjiAdapter(kanjiArray, prefsOnyomiScript) }
         }
         //adapter.setClickListener(this)
