@@ -16,7 +16,7 @@
 
     <item
         android:id="@+id/navigation_item_vocabulary"
-        android:icon="@drawable/ic_kotoba"
+        android:icon="@drawable/ic_vocabulary"
         android:title="@string/navigation_bar_vocabulary"
         app:showAsAction="ifRoom"/>
 

@@ -8,7 +8,8 @@ import android.widget.TextView
 import com.ruzaaniapps.wkquiz.datamanager.EntityVocabulary
 import kotlinx.android.synthetic.main.vocabulary_item.view.*
 
-class VocabularyAdapter(private val items: ArrayList<EntityVocabulary>) : RecyclerView.Adapter<VocabularyAdapter.ViewHolder>() {
+class VocabularyAdapter(private val items: ArrayList<EntityVocabulary>) :
+        RecyclerView.Adapter<VocabularyAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ViewHolder(
             LayoutInflater.from(parent.context).inflate(R.layout.vocabulary_item, parent, false))

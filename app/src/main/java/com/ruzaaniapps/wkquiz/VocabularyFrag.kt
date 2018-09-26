@@ -15,31 +15,26 @@ import org.jetbrains.anko.uiThread
 class VocabularyFrag : Fragment() {
     private var mListener: OnFragmentInteractionListener? = null
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.frag_vocabulary, container, false)
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        val recyclerView = rvVocabulary
-        //val divider = DividerItemDecoration(this.context, LinearLayoutManager.VERTICAL)
-        //divider.setDrawable(ContextCompat.getDrawable(this.context, R.drawable.divider_line))
-        recyclerView.layoutManager = LinearLayoutManager(this.context)
-        //recyclerView.addItemDecoration(divider)
-        doAsync {
-            val userLevel = listOf(App.datasource!!.wkDao().getUserInfo().level)
-            val vocArray = ArrayList(App.datasource!!.wkDao().getVocabularyByLevel(userLevel))
-            uiThread { recyclerView.adapter = VocabularyAdapter(vocArray) }
-        }
-        //adapter.setClickListener(this)
-    }
-
     override fun onAttach(context: Context?) {
         super.onAttach(context)
         if (context is OnFragmentInteractionListener)
             mListener = context
         else
             throw RuntimeException(context!!.toString() + " must implement OnFragmentInteractionListener")
+    }
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View =
+        inflater.inflate(R.layout.frag_vocabulary, container, false)
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        vocabRecyclerView.layoutManager = LinearLayoutManager(this.context)
+        doAsync {
+            val userLevel = listOf(App.datasource!!.wkDao().getUserInfo().level)
+            val vocArray = ArrayList(App.datasource!!.wkDao().getVocabularyByLevel(userLevel))
+            uiThread { vocabRecyclerView.adapter = VocabularyAdapter(vocArray) }
+        }
+        //adapter.setClickListener(this)
     }
 
     override fun onDetach() {

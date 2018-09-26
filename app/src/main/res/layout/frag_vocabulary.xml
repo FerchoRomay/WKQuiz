@@ -5,7 +5,7 @@
     tools:context=".VocabularyFrag">
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/rvVocabulary"
+        android:id="@+id/vocabRecyclerView"
         android:background="@color/colorSecondaryBackground"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

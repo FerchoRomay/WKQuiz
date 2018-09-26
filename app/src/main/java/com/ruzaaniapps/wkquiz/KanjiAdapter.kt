@@ -18,7 +18,7 @@ class KanjiAdapter(private val items: ArrayList<EntityKanji>, private val script
         with(items[position]){
             holder.txtKanji.text = kanji
             if(importantReading == "onyomi")
-                if(script == "Hiragana")
+                if(script == "hiragana")
                     holder.txtReading.text = onyomi.split(",")[0]
                 else
                     holder.txtReading.text = onyomi.split(",")[0].map { katakana[it]}.joinToString("")

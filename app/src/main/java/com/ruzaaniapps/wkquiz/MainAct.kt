@@ -66,16 +66,16 @@ class MainAct : AppCompatActivity(),
     }
 
     private fun saveDefaultSettings(prefs: SharedPreferences) {
-        prefs.edit().putString(R.string.app_prefs_onyomi_script.toString(), R.string.app_prefs_hiragana.toString()).apply()
-        prefs.edit().putInt(R.string.app_prefs_kanji_columns.toString(), 3).apply()
-        prefs.edit().putBoolean(R.string.app_prefs_see_all_levels.toString(), false).apply()
+        prefs.edit().putString(R.string.app_prefs_onyomi_script.toString(), prefsOnyomiScript).apply()
+        prefs.edit().putInt(R.string.app_prefs_kanji_columns.toString(), prefsKanjiColumns).apply()
+        prefs.edit().putBoolean(R.string.app_prefs_see_all_levels.toString(), prefsSeeAllLevels).apply()
     }
 
     override fun onFragmentInteraction(uri: Uri) {
         //you can leave it empty
     }
     companion object {
-        var prefsOnyomiScript = ""
+        var prefsOnyomiScript = R.string.app_prefs_hiragana.toString()
         var prefsKanjiColumns = 3
         var prefsSeeAllLevels = false
     }
