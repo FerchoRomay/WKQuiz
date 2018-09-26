@@ -13,7 +13,6 @@ import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 
 class VocabularyFrag : Fragment() {
-    private var mListener: OnFragmentInteractionListener? = null
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
@@ -47,6 +46,8 @@ class VocabularyFrag : Fragment() {
     }
 
     companion object {
+        private var mListener: OnFragmentInteractionListener? = null
+
         fun newInstance() = VocabularyFrag().apply { }
     }
 }
