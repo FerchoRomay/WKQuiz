@@ -13,7 +13,6 @@ import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 
 class KanjiFrag : Fragment() {
-    private var mListener: OnFragmentInteractionListener? = null
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
@@ -49,6 +48,7 @@ class KanjiFrag : Fragment() {
     }
 
     companion object {
+        private var mListener: OnFragmentInteractionListener? = null
         private var prefsOnyomiScript = R.string.app_prefs_hiragana.toString()
         private var prefsColumns = 3
         private const val ARG_SCRIPT = "prefsOnyomiScript"

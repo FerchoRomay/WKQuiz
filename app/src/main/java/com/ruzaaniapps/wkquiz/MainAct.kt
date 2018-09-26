@@ -12,16 +12,18 @@ import android.support.v4.app.Fragment
 import android.util.Log
 
 class MainAct : AppCompatActivity(),
+        HomeFrag.OnFragmentInteractionListener,
         KanjiFrag.OnFragmentInteractionListener,
-        VocabularyFrag.OnFragmentInteractionListener {
+        VocabularyFrag.OnFragmentInteractionListener,
+        SettingsFrag.OnFragmentInteractionListener {
 
     //private val toolbar by lazy { findViewById<Toolbar>(R.id.toolbar) }
     private val navigationBar by lazy { findViewById<BottomNavigationView>(R.id.navigationBar) }
     private val mItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
-        var fragment : Fragment = VocabularyFrag.newInstance()
+        lateinit var fragment: Fragment
         when (item.itemId) {
             R.id.navigation_item_home -> {
-                //TODO: Add Functionality
+                fragment = HomeFrag.newInstance()
             }
             R.id.navigation_item_kanji -> {
                 fragment = KanjiFrag.newInstance(prefsOnyomiScript, prefsKanjiColumns)
@@ -30,7 +32,7 @@ class MainAct : AppCompatActivity(),
                 fragment = VocabularyFrag.newInstance()
             }
             R.id.navigation_item_settings -> {
-                //TODO: Add Functionality
+                fragment = SettingsFrag.newInstance()
             }
             else ->
                 return@OnNavigationItemSelectedListener false
@@ -47,6 +49,7 @@ class MainAct : AppCompatActivity(),
         super.onCreate(savedInstanceState)
         setContentView(R.layout.act_main)
         checkIfApiKeyExists()
+        openDefaultFragment()
         navigationBar.setOnNavigationItemSelectedListener(mItemSelectedListener)
     }
 
@@ -71,9 +74,17 @@ class MainAct : AppCompatActivity(),
         prefs.edit().putBoolean(R.string.app_prefs_see_all_levels.toString(), prefsSeeAllLevels).apply()
     }
 
+    private fun openDefaultFragment() {
+        supportFragmentManager
+                .beginTransaction()
+                .replace(R.id.contentFrame, HomeFrag.newInstance())
+                .commit()
+    }
+
     override fun onFragmentInteraction(uri: Uri) {
         //you can leave it empty
     }
+
     companion object {
         var prefsOnyomiScript = R.string.app_prefs_hiragana.toString()
         var prefsKanjiColumns = 3

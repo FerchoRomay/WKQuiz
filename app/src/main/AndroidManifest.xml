@@ -13,7 +13,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/WKTheme">
-        <activity android:name=".LoginAct">
+        <activity android:name=".LoginAct"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboard">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -28,7 +30,9 @@
         </activity>
         <activity
             android:name=".MainAct"
-            android:theme="@style/SplashTheme">
+            android:theme="@style/SplashTheme"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
