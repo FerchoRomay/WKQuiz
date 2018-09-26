@@ -17,16 +17,9 @@ import kotlinx.android.synthetic.main.act_login.*
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.toast
 import org.jetbrains.anko.uiThread
-import android.content.pm.PackageManager
-import android.support.v4.app.ActivityCompat
-import android.os.Build
-
-
-
 
 class LoginAct : AppCompatActivity() {
     private val mToolbar by lazy { findViewById<Toolbar>(R.id.toolbar) }
-    //private var savedText = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
