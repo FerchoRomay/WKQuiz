@@ -15,4 +15,12 @@
     <string name="navigation_bar_kanji">Kanji</string>
     <string name="navigation_bar_vocabulary">Vocabulary</string>
     <string name="navigation_bar_settings">Settings</string>
+    <string name="settings_onyomi_text">Onyomi Script</string>
+    <string name="settings_onyomi_hint">It changes the script of kanji onyomi readings</string>
+    <string name="settings_columns_text">Kanji Columns</string>
+    <string name="settings_columns_hint">Sets the number of columns in the kanji table</string>
+    <string name="settings_all_kanji_text">Show all Kanji</string>
+    <string name="settings_all_kanji_hint">Shows kanji above your level</string>
+    <string name="settings_share_app_text">Share this app</string>
+    <string name="settings_share_app_hint">You know what this does, so share it!</string>
 </resources>
