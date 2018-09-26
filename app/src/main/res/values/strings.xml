@@ -15,7 +15,4 @@
     <string name="navigation_bar_kanji">Kanji</string>
     <string name="navigation_bar_vocabulary">Vocabulary</string>
     <string name="navigation_bar_settings">Settings</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
