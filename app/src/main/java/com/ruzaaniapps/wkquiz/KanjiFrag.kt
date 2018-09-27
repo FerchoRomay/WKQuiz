@@ -16,10 +16,11 @@ class KanjiFrag : Fragment() {
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
-        if (context is OnFragmentInteractionListener)
+        if (context is OnFragmentInteractionListener) {
             mListener = context
-        else
+        } else {
             throw RuntimeException(context!!.toString() + " must implement OnFragmentInteractionListener")
+        }
         arguments?.getString(ARG_SCRIPT).let { prefsOnyomiScript = it.toString() }
         arguments?.getInt(ARG_COLUMNS).let { prefsColumns = it ?: prefsColumns }
     }
@@ -49,7 +50,7 @@ class KanjiFrag : Fragment() {
 
     companion object {
         private var mListener: OnFragmentInteractionListener? = null
-        private var prefsOnyomiScript = R.string.app_prefs_hiragana.toString()
+        private var prefsOnyomiScript = "hiragana"
         private var prefsColumns = 3
         private const val ARG_SCRIPT = "prefsOnyomiScript"
         private const val ARG_COLUMNS = "prefsColumns"

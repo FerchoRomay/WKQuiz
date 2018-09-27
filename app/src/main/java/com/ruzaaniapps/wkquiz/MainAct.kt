@@ -32,7 +32,7 @@ class MainAct : AppCompatActivity(),
                 fragment = VocabularyFrag.newInstance()
             }
             R.id.navigation_item_settings -> {
-                fragment = SettingsFrag.newInstance()
+                fragment = SettingsFrag.newInstance(prefsOnyomiScript, prefsKanjiColumns, prefsSeeAllLevels)
             }
             else ->
                 return@OnNavigationItemSelectedListener false
@@ -54,24 +54,24 @@ class MainAct : AppCompatActivity(),
     }
 
     private fun checkIfApiKeyExists() {
-        val prefsFileName = R.string.app_prefs_file.toString()
+        val prefsFileName = getString(R.string.app_prefs_file)
         val prefsFile = getSharedPreferences(prefsFileName, Context.MODE_PRIVATE)
         //If it doesn't exists then the loginAct is started to register the API Key
-        if (!prefsFile.contains(R.string.app_prefs_user_api_key.toString())) {
+        if (!prefsFile.contains(getString(R.string.app_prefs_user_api_key))) {
             Log.wtf("", "Starting LoginAct")
             saveDefaultSettings(prefsFile)
             startActivity(Intent(this, LoginAct::class.java))
         }
         //Saves the preferences for later usage
-        prefsOnyomiScript = prefsFile?.getString(R.string.app_prefs_onyomi_script.toString(), R.string.app_prefs_hiragana.toString()).toString()
-        prefsKanjiColumns = prefsFile.getInt(R.string.app_prefs_kanji_columns.toString(), 3)
-        prefsSeeAllLevels = prefsFile.getBoolean((R.string.app_prefs_see_all_levels.toString()),false)
+        prefsOnyomiScript = prefsFile?.getString(getString(R.string.app_prefs_onyomi_script), prefsOnyomiScript).toString()
+        prefsKanjiColumns = prefsFile.getInt(getString(R.string.app_prefs_kanji_columns), 3)
+        prefsSeeAllLevels = prefsFile.getBoolean((getString(R.string.app_prefs_see_all_levels)),false)
     }
 
     private fun saveDefaultSettings(prefs: SharedPreferences) {
-        prefs.edit().putString(R.string.app_prefs_onyomi_script.toString(), prefsOnyomiScript).apply()
-        prefs.edit().putInt(R.string.app_prefs_kanji_columns.toString(), prefsKanjiColumns).apply()
-        prefs.edit().putBoolean(R.string.app_prefs_see_all_levels.toString(), prefsSeeAllLevels).apply()
+        prefs.edit().putString(getString(R.string.app_prefs_onyomi_script), prefsOnyomiScript).apply()
+        prefs.edit().putInt(getString(R.string.app_prefs_kanji_columns), prefsKanjiColumns).apply()
+        prefs.edit().putBoolean(getString(R.string.app_prefs_see_all_levels), prefsSeeAllLevels).apply()
     }
 
     private fun openDefaultFragment() {
@@ -86,7 +86,7 @@ class MainAct : AppCompatActivity(),
     }
 
     companion object {
-        var prefsOnyomiScript = R.string.app_prefs_hiragana.toString()
+        var prefsOnyomiScript = "hiragana"
         var prefsKanjiColumns = 3
         var prefsSeeAllLevels = false
     }

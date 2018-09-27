@@ -85,8 +85,8 @@ class LoginAct : AppCompatActivity() {
     }
 
     private fun saveUserApiKey() {
-        val prefsFileName = R.string.app_prefs_file.toString()
-        val prefUserApi = R.string.app_prefs_user_api_key.toString()
+        val prefsFileName = getString(R.string.app_prefs_file)
+        val prefUserApi = getString(R.string.app_prefs_user_api_key)
         val currentUserApi = loginApiKey.text.toString()
         val prefs = getSharedPreferences(prefsFileName, Context.MODE_PRIVATE)
         prefs.edit().putString(prefUserApi, currentUserApi).apply()

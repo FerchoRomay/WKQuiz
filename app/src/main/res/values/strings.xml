@@ -6,6 +6,8 @@
     <string name="app_prefs_katakana">katakana</string>
     <string name="app_prefs_kanji_columns">kanji_columns</string>
     <string name="app_prefs_see_all_levels">see_all_levels</string>
+    <string name="app_prefs_all_levels_true">Yes</string>
+    <string name="app_prefs_all_levels_false">No</string>
     <string name="app_name">WKQuiz</string>
     <string name="error_url">There was an error. Please verify your API key</string>
     <string name="login_text">Enter your API key:</string>

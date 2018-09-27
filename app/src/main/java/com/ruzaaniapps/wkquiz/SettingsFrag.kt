@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import kotlinx.android.synthetic.main.frag_settings.*
 
 class SettingsFrag : Fragment() {
 
@@ -16,6 +17,20 @@ class SettingsFrag : Fragment() {
             listener = context
         } else {
             throw RuntimeException(context.toString() + " must implement OnFragmentInteractionListener")
+        }
+        arguments?.getString(ARG_SCRIPT).let { prefsOnyomiScript = it.toString() }
+        arguments?.getInt(ARG_COLUMNS).let { prefsColumns = it ?: prefsColumns }
+        arguments?.getBoolean(ARG_LEVELS).let { prefsSeeAllLevels = it ?: prefsSeeAllLevels}
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        settingsOnyomiValue.text = prefsOnyomiScript
+        settingsColumnsValue.text = prefsColumns.toString()
+        settingsAllKanjiValue.text = if (prefsSeeAllLevels) {
+            getString(R.string.app_prefs_all_levels_true)
+        } else {
+            getString(R.string.app_prefs_all_levels_false)
         }
     }
 
@@ -33,8 +48,20 @@ class SettingsFrag : Fragment() {
 
     companion object {
         private var listener: OnFragmentInteractionListener? = null
+        private var prefsOnyomiScript = "hiragana"
+        private var prefsColumns = 3
+        private var prefsSeeAllLevels = false
+        private const val ARG_SCRIPT = "prefsOnyomiScript"
+        private const val ARG_COLUMNS = "prefsColumns"
+        private const val ARG_LEVELS = "prefsSeeAllLevels"
 
         @JvmStatic
-        fun newInstance() = SettingsFrag().apply { }
+        fun newInstance(onyomiScript: String, columns: Int, levels: Boolean) = SettingsFrag().apply {
+            arguments = Bundle().apply {
+                putString(ARG_SCRIPT, onyomiScript)
+                putInt(ARG_COLUMNS, columns)
+                putBoolean(ARG_LEVELS, levels)
+            }
+        }
     }
 }
