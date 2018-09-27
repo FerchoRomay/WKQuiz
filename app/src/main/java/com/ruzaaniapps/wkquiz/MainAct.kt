@@ -12,9 +12,6 @@ import android.support.v4.app.Fragment
 import android.util.Log
 
 class MainAct : AppCompatActivity(),
-        HomeFrag.OnFragmentInteractionListener,
-        KanjiFrag.OnFragmentInteractionListener,
-        VocabularyFrag.OnFragmentInteractionListener,
         SettingsFrag.OnFragmentInteractionListener {
 
     //private val toolbar by lazy { findViewById<Toolbar>(R.id.toolbar) }
@@ -53,22 +50,30 @@ class MainAct : AppCompatActivity(),
         navigationBar.setOnNavigationItemSelectedListener(mItemSelectedListener)
     }
 
+    override fun onPause() {
+        super.onPause()
+        val prefsFileName = getString(R.string.app_prefs_file)
+        val prefsFile = getSharedPreferences(prefsFileName, Context.MODE_PRIVATE)
+        saveSharedPreferences(prefsFile)
+    }
+
     private fun checkIfApiKeyExists() {
         val prefsFileName = getString(R.string.app_prefs_file)
         val prefsFile = getSharedPreferences(prefsFileName, Context.MODE_PRIVATE)
         //If it doesn't exists then the loginAct is started to register the API Key
         if (!prefsFile.contains(getString(R.string.app_prefs_user_api_key))) {
             Log.wtf("", "Starting LoginAct")
-            saveDefaultSettings(prefsFile)
+            //Saves the default shared preferences values
+            saveSharedPreferences(prefsFile)
             startActivity(Intent(this, LoginAct::class.java))
         }
-        //Saves the preferences for later usage
+        //Loads the preferences for later usage
         prefsOnyomiScript = prefsFile?.getString(getString(R.string.app_prefs_onyomi_script), prefsOnyomiScript).toString()
         prefsKanjiColumns = prefsFile.getInt(getString(R.string.app_prefs_kanji_columns), 3)
         prefsSeeAllLevels = prefsFile.getBoolean((getString(R.string.app_prefs_see_all_levels)),false)
     }
 
-    private fun saveDefaultSettings(prefs: SharedPreferences) {
+    private fun saveSharedPreferences(prefs: SharedPreferences) {
         prefs.edit().putString(getString(R.string.app_prefs_onyomi_script), prefsOnyomiScript).apply()
         prefs.edit().putInt(getString(R.string.app_prefs_kanji_columns), prefsKanjiColumns).apply()
         prefs.edit().putBoolean(getString(R.string.app_prefs_see_all_levels), prefsSeeAllLevels).apply()

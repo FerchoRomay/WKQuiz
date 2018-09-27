@@ -8,6 +8,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.frag_settings.*
+import org.jetbrains.anko.support.v4.selector
+import org.jetbrains.anko.support.v4.toast
 
 class SettingsFrag : Fragment() {
 
@@ -32,6 +34,7 @@ class SettingsFrag : Fragment() {
         } else {
             getString(R.string.app_prefs_all_levels_false)
         }
+        setClickListeners()
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
@@ -40,6 +43,35 @@ class SettingsFrag : Fragment() {
     override fun onDetach() {
         super.onDetach()
         listener = null
+    }
+
+    private fun setClickListeners() {
+        settingsOnyomiFrame.setOnClickListener {
+        val scripts = listOf(getString(R.string.app_prefs_hiragana),
+                getString(R.string.app_prefs_katakana))
+        selector(getString(R.string.settings_onyomi_text), scripts) { _, i ->
+            settingsOnyomiValue.text = scripts[i]
+            MainAct.prefsOnyomiScript = scripts[i]
+        }
+    }
+        settingsColumnsFrame.setOnClickListener {
+            val columns = listOf("2", "3", "4")
+            selector(getString(R.string.settings_columns_text), columns) { _, i ->
+                settingsColumnsValue.text = columns[i]
+                MainAct.prefsKanjiColumns = columns[i].toInt()
+            }
+        }
+        settingsAllKanjiFrame.setOnClickListener {
+            val answers = listOf(getString(R.string.app_prefs_all_levels_true),
+                    getString(R.string.app_prefs_all_levels_false))
+            selector(getString(R.string.settings_all_kanji_text), answers) { _, i ->
+                settingsAllKanjiValue.text = answers[i]
+                MainAct.prefsSeeAllLevels = settingsAllKanjiValue.text == getString(R.string.app_prefs_all_levels_true)
+            }
+        }
+        settingsShareAppFrame.setOnClickListener {
+            toast("Share app functionality is still not coded :V")
+        }
     }
 
     interface OnFragmentInteractionListener {

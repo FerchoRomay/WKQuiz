@@ -1,7 +1,6 @@
 package com.ruzaaniapps.wkquiz
 
 import android.content.Context
-import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
@@ -16,11 +15,6 @@ class KanjiFrag : Fragment() {
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
-        if (context is OnFragmentInteractionListener) {
-            mListener = context
-        } else {
-            throw RuntimeException(context!!.toString() + " must implement OnFragmentInteractionListener")
-        }
         arguments?.getString(ARG_SCRIPT).let { prefsOnyomiScript = it.toString() }
         arguments?.getInt(ARG_COLUMNS).let { prefsColumns = it ?: prefsColumns }
     }
@@ -39,17 +33,7 @@ class KanjiFrag : Fragment() {
         //adapter.setClickListener(this)
     }
 
-    override fun onDetach() {
-        super.onDetach()
-        mListener = null
-    }
-
-    interface OnFragmentInteractionListener {
-        fun onFragmentInteraction(uri: Uri)
-    }
-
     companion object {
-        private var mListener: OnFragmentInteractionListener? = null
         private var prefsOnyomiScript = "hiragana"
         private var prefsColumns = 3
         private const val ARG_SCRIPT = "prefsOnyomiScript"

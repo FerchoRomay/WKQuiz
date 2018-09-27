@@ -1,7 +1,5 @@
 package com.ruzaaniapps.wkquiz
 
-import android.content.Context
-import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
@@ -13,14 +11,6 @@ import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 
 class VocabularyFrag : Fragment() {
-
-    override fun onAttach(context: Context?) {
-        super.onAttach(context)
-        if (context is OnFragmentInteractionListener)
-            mListener = context
-        else
-            throw RuntimeException(context!!.toString() + " must implement OnFragmentInteractionListener")
-    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View =
         inflater.inflate(R.layout.frag_vocabulary, container, false)
@@ -36,18 +26,7 @@ class VocabularyFrag : Fragment() {
         //adapter.setClickListener(this)
     }
 
-    override fun onDetach() {
-        super.onDetach()
-        mListener = null
-    }
-
-    interface OnFragmentInteractionListener {
-        fun onFragmentInteraction(uri: Uri)
-    }
-
     companion object {
-        private var mListener: OnFragmentInteractionListener? = null
-
         fun newInstance() = VocabularyFrag().apply { }
     }
 }
