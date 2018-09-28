@@ -34,8 +34,13 @@ class LoginAct : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        Log.wtf("LoginAct", "Back button pressed")
+        if (back_pressed_time + PERIOD > System.currentTimeMillis())
+            super.onBackPressed()
+        else
+            toast(resources.getString(R.string.double_click_exit))
+        back_pressed_time = System.currentTimeMillis()
     }
+
 
     private fun addListenerOnClickEditText() {
         loginApiKey.setOnClickListener { _ ->
@@ -134,5 +139,11 @@ class LoginAct : AppCompatActivity() {
             wordList.add(newWord)
         }
         App.datasource!!.wkDao().insertAllVocabulary(wordList)
+    }
+
+    companion object {
+        //Double click to exit values
+        private const val PERIOD = 2000L
+        private var back_pressed_time = 0L
     }
 }
