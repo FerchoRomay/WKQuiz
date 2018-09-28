@@ -20,11 +20,16 @@ class JsonRequest(private val api: String) {
         return Gson().fromJson<WkResultVocabulary>(wkJsonStr, WkResultVocabulary::class.java)
     }
 
+    fun getStudyQueue(): WkResultStudyQueue {
+        val wkJsonStr = URL("$url/$api/study-queue").readText()
+        return Gson().fromJson<WkResultStudyQueue>(wkJsonStr, WkResultStudyQueue::class.java)
+    }
+
     companion object {
-        private val allLevels = "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20," +
+        private const val allLevels = "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20," +
                 "21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40," +
                 "41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60"
-        private val url = "https://www.wanikani.com/api/user"
+        private const val url = "https://www.wanikani.com/api/user"
 
         data class WkResultKanji(val user_information: User,
                                  val requested_information: List<InfoKanji>)
@@ -32,10 +37,17 @@ class JsonRequest(private val api: String) {
         data class WkResultVocabulary(val user_information: User,
                                       val requested_information: List<InfoWord>)
 
+        data class WkResultStudyQueue(val user_information: User,
+                                      val requested_information: StudyQueue)
+
         data class User(val username: String, val gravatar: String, val level: Int,
                         val title: String, val about: String?, val website: String?,
                         val twitter: String?, val topics_count: Int, val posts_count: Int,
                         val creation_date: Long, val vacation_date: Long)
+
+        data class StudyQueue(val lessons_available: Int, val reviews_available: Int,
+                              val next_review_date: Long?, val reviews_available_next_hour: Int,
+                              val reviews_available_next_day: Int)
 
         data class InfoKanji(val level: Int, val character: String, val meaning: String,
                              val onyomi: String?, val kunyomi: String?, val important_reading: String,
