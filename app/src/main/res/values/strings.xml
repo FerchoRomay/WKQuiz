@@ -1,4 +1,5 @@
 <resources>
+    <string name="app_name">WKQuiz</string>
     <string name="app_prefs_file">com.ruzaaniapps.wkquiz.DefaultPrefsFile</string>
     <string name="app_prefs_user_api_key">user_api_key</string>
     <string name="app_prefs_onyomi_script">onyomi_script</string>
@@ -8,7 +9,7 @@
     <string name="app_prefs_see_all_levels">see_all_levels</string>
     <string name="app_prefs_all_levels_true">Yes</string>
     <string name="app_prefs_all_levels_false">No</string>
-    <string name="app_name">WKQuiz</string>
+    <string name="double_click_exit">Press BACK once again to exit!</string>
     <string name="error_url">There was an error. Please verify your API key</string>
     <string name="login_text">Enter your API key:</string>
     <string name="login_hint">API Key</string>

@@ -8,13 +8,12 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.Fragment
-//import android.support.v7.widget.Toolbar
 import android.util.Log
+import org.jetbrains.anko.toast
 
 class MainAct : AppCompatActivity(),
         SettingsFrag.OnFragmentInteractionListener {
 
-    //private val toolbar by lazy { findViewById<Toolbar>(R.id.toolbar) }
     private val navigationBar by lazy { findViewById<BottomNavigationView>(R.id.navigationBar) }
     private val mItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         lateinit var fragment: Fragment
@@ -86,6 +85,14 @@ class MainAct : AppCompatActivity(),
                 .commit()
     }
 
+    override fun onBackPressed() {
+        if (back_pressed_time + PERIOD > System.currentTimeMillis())
+            super.onBackPressed()
+        else
+            toast(resources.getString(R.string.double_click_exit))
+        back_pressed_time = System.currentTimeMillis()
+    }
+
     override fun onFragmentInteraction(uri: Uri) {
         //you can leave it empty
     }
@@ -94,5 +101,9 @@ class MainAct : AppCompatActivity(),
         var prefsOnyomiScript = "hiragana"
         var prefsKanjiColumns = 3
         var prefsSeeAllLevels = false
+
+        //Double click to exit values
+        private const val PERIOD = 2000L
+        private var back_pressed_time = 0L
     }
 }
