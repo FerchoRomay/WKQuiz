@@ -42,9 +42,9 @@ class MainAct : AppCompatActivity(),
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.WKTheme)
+        checkIfApiKeyExists()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.act_main)
-        checkIfApiKeyExists()
         openDefaultFragment()
         navigationBar.setOnNavigationItemSelectedListener(mItemSelectedListener)
     }
