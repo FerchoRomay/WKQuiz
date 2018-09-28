@@ -19,7 +19,7 @@ class MainAct : AppCompatActivity(),
         lateinit var fragment: Fragment
         when (item.itemId) {
             R.id.navigation_item_home -> {
-                fragment = HomeFrag.newInstance()
+                fragment = HomeFrag.newInstance(prefsUserApiKey)
             }
             R.id.navigation_item_kanji -> {
                 fragment = KanjiFrag.newInstance(prefsOnyomiScript, prefsKanjiColumns)
@@ -68,8 +68,9 @@ class MainAct : AppCompatActivity(),
         }
         //Loads the preferences for later usage
         prefsOnyomiScript = prefsFile?.getString(getString(R.string.app_prefs_onyomi_script), prefsOnyomiScript).toString()
-        prefsKanjiColumns = prefsFile.getInt(getString(R.string.app_prefs_kanji_columns), 3)
-        prefsSeeAllLevels = prefsFile.getBoolean((getString(R.string.app_prefs_see_all_levels)),false)
+        prefsKanjiColumns = prefsFile.getInt(getString(R.string.app_prefs_kanji_columns), prefsKanjiColumns)
+        prefsSeeAllLevels = prefsFile.getBoolean(getString(R.string.app_prefs_see_all_levels), prefsSeeAllLevels)
+        prefsUserApiKey = prefsFile?.getString(getString(R.string.app_prefs_user_api_key), prefsUserApiKey).toString()
     }
 
     private fun saveSharedPreferences(prefs: SharedPreferences) {
@@ -81,7 +82,7 @@ class MainAct : AppCompatActivity(),
     private fun openDefaultFragment() {
         supportFragmentManager
                 .beginTransaction()
-                .replace(R.id.contentFrame, HomeFrag.newInstance())
+                .replace(R.id.contentFrame, HomeFrag.newInstance(prefsUserApiKey))
                 .commit()
     }
 
@@ -101,6 +102,7 @@ class MainAct : AppCompatActivity(),
         var prefsOnyomiScript = "hiragana"
         var prefsKanjiColumns = 3
         var prefsSeeAllLevels = false
+        var prefsUserApiKey = ""
 
         //Double click to exit values
         private const val PERIOD = 2000L
